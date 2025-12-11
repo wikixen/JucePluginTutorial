@@ -23,6 +23,7 @@ Plugin_tutorialAudioProcessorEditor::Plugin_tutorialAudioProcessorEditor (Plugin
     midiVolume.setTextValueSuffix(" Volume");
     midiVolume.setValue(1.0);
     addAndMakeVisible(&midiVolume);
+    midiVolume.addListener(this);
 }
 
 Plugin_tutorialAudioProcessorEditor::~Plugin_tutorialAudioProcessorEditor()
@@ -43,4 +44,9 @@ void Plugin_tutorialAudioProcessorEditor::paint (juce::Graphics& g)
 void Plugin_tutorialAudioProcessorEditor::resized()
 {
     midiVolume.setBounds(40, 30, 20, getHeight() - 60);
+}
+
+void Plugin_tutorialAudioProcessorEditor::sliderValueChanged(juce::Slider *slider)
+{
+    audioProcessor.noteOnVel = midiVolume.getValue();
 }
